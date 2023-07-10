@@ -1,6 +1,36 @@
+import { useNavigate } from "react-router-dom"
 import { Body, Main, Svg, P, ButtonContinuar, ButtonCriaConta, InputEmail, InputSenha, Header, Hr} from "./style"
+import { goToCreateAccount, goToFeedPosts } from "../../routes/coordinator"
+import axios from "axios"
+import { useContext } from "react"
+import { GlobalContext } from "../../contexts/GlobalContext"
 
 const Login = () => {
+    const navigate = useNavigate()
+    const context = useContext(GlobalContext)
+
+    const {email,setEmail,senha,setSenha, token, setToken} = context
+
+    
+
+    const login = () => {
+        const body = {
+            email,
+            password: senha
+        }
+
+        axios.post("https://projeto-integrador-backend-ac3e.onrender.com/users/login", body) 
+        .then((res) => {
+            setToken(res.data.token)
+            goToFeedPosts(navigate)
+            setEmail()
+            setSenha()
+        })
+        .catch((err) => {
+            console.log("erro add", err.response);
+        })
+    }
+
     return (
         <Body>
             <Header>
@@ -17,15 +47,17 @@ const Login = () => {
             </Header>
             <Main>
                 <label className="email"></label>
-                <InputEmail className="email" type="text" placeholder="Email"></InputEmail>
+                <InputEmail className="email" type="text" placeholder="Email" value={email} onChange={(e) => {
+                    setEmail(e.target.value)
+                }}></InputEmail>
 
                 <label className="password"></label>
-                <InputSenha className="password" type="password" placeholder="Senha"></InputSenha>
+                <InputSenha className="password" type="password" placeholder="Senha" value={senha} onChange={(e) => {setSenha(e.target.value)}}></InputSenha>
 
                 
-                <ButtonContinuar>Continuar</ButtonContinuar>
+                <ButtonContinuar onClick={() => login()}>Continuar</ButtonContinuar>
                 <Hr></Hr>
-                <ButtonCriaConta>Crie uma conta!</ButtonCriaConta>
+                <ButtonCriaConta onClick={() => goToCreateAccount(navigate)}>Crie uma conta!</ButtonCriaConta>
             </Main>
         </Body>
     )

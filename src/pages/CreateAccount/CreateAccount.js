@@ -1,6 +1,35 @@
+import { useNavigate } from "react-router-dom"
 import { Body, ButtonCadastrar, Div, Form, ButtonEntrar, Header, InputApelido, InputEmail, InputSenha, Label, Main, P, Svg } from "./style"
+import { goToLogin } from "../../routes/coordinator"
+import { useContext } from "react"
+import { GlobalContext } from "../../contexts/GlobalContext"
+import axios from "axios"
 
 const CreateAccount = () => {
+    const navigate = useNavigate()
+    const context = useContext(GlobalContext)
+
+    const {apelido, setApelido, email, setEmail, senha, setSenha, token, setToken} = context
+
+    const signup = () => {
+        const body = {
+            name: apelido,
+            email,
+            password: senha
+        }
+
+        axios.post("https://projeto-integrador-backend-ac3e.onrender.com/users/signup", body) 
+        .then(() => {
+
+            goToLogin(navigate)
+            setApelido()
+            setEmail()
+            setSenha()
+        })
+        .catch((err) => {
+            console.log("erro",err.response);
+        })
+    }
     return(
         <Body>
            <Header>
@@ -11,20 +40,20 @@ const CreateAccount = () => {
                     <path d="M1.27212e-06 41.9948C-0.00135632 36.4796 1.0839 31.0182 3.19386 25.9225C5.30382 20.8268 8.39708 16.1968 12.2969 12.297C16.1968 8.39711 20.8268 5.30385 25.9225 3.19389C31.0182 1.08394 36.4796 -0.00135632 41.9948 1.27209e-06V41.9948H1.27212e-06Z" fill="#FE7E02"/>
                 </Svg>
 
-                <ButtonEntrar>Entrar</ButtonEntrar>
+                <ButtonEntrar onClick={() => signup(navigate)}>Entrar</ButtonEntrar>
            </Header>
             <Main>
                 <h1>Olá, boas vindas ao LabEddit ;)</h1>
             
                 <Form>
                     <label for="apelido"></label>
-                    <InputApelido id="apelido" className="cadastro" type="text" placeholder="Apelido"></InputApelido>
+                    <InputApelido id="apelido" className="cadastro" type="text" placeholder="Apelido" value={apelido} onChange={(e) => { setApelido(e.target.value)}}></InputApelido>
                 
                     <label for="email"></label>
-                    <InputEmail id="email" className="cadastro" type="text" placeholder="Email"></InputEmail>
+                    <InputEmail id="email" className="cadastro" type="text" placeholder="Email" value={email} onChange={(e) => {setEmail(e.target.value)}}></InputEmail>
                 
                     <label for="senha"></label>
-                    <InputSenha id="senha" className="cadastro" type="text" placeholder="Senha"></InputSenha>
+                    <InputSenha id="senha" className="cadastro" type="text" placeholder="Senha" value={senha} onChange={(e) => {setSenha(e.target.value)}}></InputSenha>
                 
                     <P>Ao continuar, você concorda com o nosso <font color="#4088CB">Contrato de usuário</font> e nossa  <font color="#4088CB">Política de Privacidade</font></P>
                 
@@ -33,7 +62,7 @@ const CreateAccount = () => {
                         <Label for="check">Eu concordo em receber emails sobre coisas legais no Labeddit</Label>   
                     </Div>
                     
-                    <ButtonCadastrar>Cadastrar</ButtonCadastrar>
+                    <ButtonCadastrar onClick={() => signup()}>Cadastrar</ButtonCadastrar>
                 </Form>
                 
             </Main>
