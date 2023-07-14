@@ -1,6 +1,9 @@
 const LayoutComments = () => {
     return (
-        <></>
+        <>
+        <p>LKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
+                 KKKKKKKKKKKKKKKKKKKKKKKKK
+          </p></>
     )
 }
 

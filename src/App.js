@@ -7,9 +7,11 @@ function App() {
 
   const [email, setEmail] = useState()
   const [senha, setSenha] = useState()
+  const [loginEmail, setLoginEmail] = useState()
+  const [loginSenha, setLoginSenha] = useState()
   const [token, setToken] = useState()
   const [apelido, setApelido] = useState()
-
+  const [post, setPost] = useState([])
 
   const context = {
     email: email,
@@ -19,7 +21,13 @@ function App() {
     token: token, 
     setToken: setToken,
     apelido: apelido, 
-    setApelido: setApelido
+    setApelido: setApelido,
+    loginEmail: loginEmail, 
+    setLoginEmail: setLoginEmail,
+    loginSenha: loginSenha, 
+    setLoginSenha: setLoginSenha,
+    post: post, 
+    setPost: setPost
   }
   return (
     <GlobalContext.Provider value={context}>
