@@ -9,24 +9,23 @@ const Login = () => {
     const navigate = useNavigate()
     const context = useContext(GlobalContext)
 
-    const {email,setEmail,senha,setSenha, token, setToken} = context
-
-    
+    const { loginEmail, setLoginEmail, loginSenha, setLoginSenha, token, setToken } = context
 
     const login = () => {
         const body = {
-            email,
-            password: senha
+            email: loginEmail,
+            password: loginSenha
         }
 
         axios.post("https://projeto-integrador-backend-ac3e.onrender.com/users/login", body) 
         .then((res) => {
             setToken(res.data.token)
             goToFeedPosts(navigate)
-            setEmail()
-            setSenha()
+            setLoginEmail()
+            setLoginSenha()
         })
         .catch((err) => {
+        
             console.log("erro add", err.response);
         })
     }
@@ -47,14 +46,13 @@ const Login = () => {
             </Header>
             <Main>
                 <label className="email"></label>
-                <InputEmail className="email" type="text" placeholder="Email" value={email} onChange={(e) => {
-                    setEmail(e.target.value)
+                <InputEmail className="email" type="text" placeholder="Email" value={loginEmail} onChange={(e) => {
+                    setLoginEmail(e.target.value)
                 }}></InputEmail>
 
                 <label className="password"></label>
-                <InputSenha className="password" type="password" placeholder="Senha" value={senha} onChange={(e) => {setSenha(e.target.value)}}></InputSenha>
+                <InputSenha className="password" type="password" placeholder="Senha" value={loginSenha} onChange={(e) => {setLoginSenha(e.target.value)}}></InputSenha>
 
-                
                 <ButtonContinuar onClick={() => login()}>Continuar</ButtonContinuar>
                 <Hr></Hr>
                 <ButtonCriaConta onClick={() => goToCreateAccount(navigate)}>Crie uma conta!</ButtonCriaConta>

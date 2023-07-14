@@ -11,6 +11,13 @@ const CreateAccount = () => {
 
     const {apelido, setApelido, email, setEmail, senha, setSenha, token, setToken} = context
 
+    const cleanInputs = (() => {
+        setApelido()
+        setEmail()
+        setSenha()
+        goToLogin(navigate)
+    })
+
     const signup = () => {
         const body = {
             name: apelido,
@@ -40,7 +47,7 @@ const CreateAccount = () => {
                     <path d="M1.27212e-06 41.9948C-0.00135632 36.4796 1.0839 31.0182 3.19386 25.9225C5.30382 20.8268 8.39708 16.1968 12.2969 12.297C16.1968 8.39711 20.8268 5.30385 25.9225 3.19389C31.0182 1.08394 36.4796 -0.00135632 41.9948 1.27209e-06V41.9948H1.27212e-06Z" fill="#FE7E02"/>
                 </Svg>
 
-                <ButtonEntrar onClick={() => signup(navigate)}>Entrar</ButtonEntrar>
+                <ButtonEntrar onClick={() => cleanInputs()}>Entrar</ButtonEntrar>
            </Header>
             <Main>
                 <h1>Olá, boas vindas ao LabEddit ;)</h1>
