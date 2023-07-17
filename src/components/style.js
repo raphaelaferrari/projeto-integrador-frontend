@@ -6,7 +6,7 @@ export const Div = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    min-height: 20vh;
+    min-height: 25vh;
     border-radius: 12px;
     border: 1px solid #E0E0E0;
     background: #FBFBFB;

@@ -9,7 +9,7 @@ const CreateAccount = () => {
     const navigate = useNavigate()
     const context = useContext(GlobalContext)
 
-    const {apelido, setApelido, email, setEmail, senha, setSenha, token, setToken} = context
+    const {apelido, setApelido, email, setEmail, senha, setSenha } = context
 
     const cleanInputs = (() => {
         setApelido()
@@ -18,6 +18,7 @@ const CreateAccount = () => {
         goToLogin(navigate)
     })
 
+    
     const signup = () => {
         const body = {
             name: apelido,

@@ -9,7 +9,13 @@ const Login = () => {
     const navigate = useNavigate()
     const context = useContext(GlobalContext)
 
-    const { loginEmail, setLoginEmail, loginSenha, setLoginSenha, token, setToken } = context
+    const { loginEmail, setLoginEmail, loginSenha, setLoginSenha, setToken } = context
+
+    const clearInput = () => {
+        setLoginEmail("")
+        setLoginSenha("")
+        goToCreateAccount(navigate)
+    }
 
     const login = () => {
         const body = {
@@ -55,7 +61,7 @@ const Login = () => {
 
                 <ButtonContinuar onClick={() => login()}>Continuar</ButtonContinuar>
                 <Hr></Hr>
-                <ButtonCriaConta onClick={() => goToCreateAccount(navigate)}>Crie uma conta!</ButtonCriaConta>
+                <ButtonCriaConta onClick={() => clearInput()}>Crie uma conta!</ButtonCriaConta>
             </Main>
         </Body>
     )

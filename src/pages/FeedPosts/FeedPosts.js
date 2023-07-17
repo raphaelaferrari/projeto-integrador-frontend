@@ -12,7 +12,7 @@ const FeedPosts = () => {
     const context = useContext(GlobalContext)
 
     const [createPost, setCreatePost] = useState()
-    const { token, setToken, post, setPost } = context
+    const { token, setToken, setPost } = context
 
     const cleanUseState = (() => {
         setToken("")
@@ -63,7 +63,6 @@ const FeedPosts = () => {
 
     useEffect(() => {
         getPost()
-        console.log(post);
     }, [])
     
     return (
