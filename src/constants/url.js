@@ -1,1 +1,0 @@
-export const BASE_URL = "https://projeto-integrador-backend-ac3e.onrender.com"
